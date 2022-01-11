@@ -1,0 +1,21 @@
+doctype html
+html
+  head
+    meta(name='viewport', content='width=device-width')
+    meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
+    title= subject
+
+    include _style
+  body
+    div.container
+      div.card
+        div.card-img
+          - var img = published ? "cid:logo" : "http://localhost:5000/img/wallet.png"
+          img.logo(src=img alt='Budget Tracker logo')
+          span.logo-title Budgety
+        h1.card-title Verify your login
+        p.card-subtitle Below is your one time password
+        span.card-otp #{otpCode}
+        span.card-footer Let's finish verifying your email address for now because the password will expire in 10 minutes
+        span.sender
+
