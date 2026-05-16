@@ -1,4 +1,4 @@
-# Budgety Adventure — REST API
+# Budgety Adventure: REST API
 
 A personal finance REST API built with Node.js, Express, and MongoDB. Supports multi-wallet budget tracking, income/expense categorisation, OTP email verification, JWT authentication, and MongoDB aggregation-powered financial analytics.
 
@@ -7,12 +7,12 @@ A personal finance REST API built with Node.js, Express, and MongoDB. Supports m
 
 ## Features
 
-- **JWT Authentication** — secure signup/login with bcrypt password hashing and configurable token expiry
-- **OTP Email Verification** — 5-digit OTP delivered via Nodemailer (Mailtrap in dev, Gmail SMTP in prod); SHA-256 hashed before storage, expires in 10 minutes
-- **Multi-wallet Support** — users manage multiple named wallets with icons, colours, and balance tracking; deleting a wallet cascades to all its transactions
-- **Transaction Analytics** — MongoDB aggregation pipelines for monthly income/expense summaries and full annual stats grouped by month
-- **Image Processing** — avatar uploads processed in-memory by Sharp before disk write
-- **OpenAPI 3.0 Docs** — full Swagger UI at `/api-docs` covering all 18 endpoints with request/response schemas, JWT auth, and examples
+- **JWT Authentication**: secure signup/login with bcrypt password hashing and configurable token expiry
+- **OTP Email Verification**: 5-digit OTP delivered via Nodemailer (Mailtrap in dev, Gmail SMTP in prod); SHA-256 hashed before storage, expires in 10 minutes
+- **Multi-wallet Support**: users manage multiple named wallets with icons, colours, and balance tracking; deleting a wallet cascades to all its transactions
+- **Transaction Analytics**: MongoDB aggregation pipelines for monthly income/expense summaries and full annual stats grouped by month
+- **Image Processing**: avatar uploads processed in-memory by Sharp before disk write
+- **OpenAPI 3.0 Docs**: full Swagger UI at `/api-docs` covering all 18 endpoints with request/response schemas, JWT auth, and examples
 
 ## Tech Stack
 
@@ -141,7 +141,7 @@ npm run dev   # development with auto-reload
 npm start     # production
 ```
 
-The server runs on port `5000` by default — override with the `PORT` env var.
+The server runs on port `5000` by default; use the `PORT` env var to override.
 
 ## Environment Variables
 
