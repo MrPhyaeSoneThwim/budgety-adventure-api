@@ -2,6 +2,9 @@
 
 A personal finance REST API built with Node.js, Express, and MongoDB. Supports multi-wallet budget tracking, income/expense categorisation, OTP email verification, JWT authentication, and MongoDB aggregation-powered financial analytics.
 
+**Live API:** https://budgety-adventure-api.onrender.com  
+**API Docs:** https://budgety-adventure-api.onrender.com/api-docs
+
 ## Features
 
 - **JWT Authentication** — secure signup/login with bcrypt password hashing and configurable token expiry
@@ -102,7 +105,7 @@ budgety-adventure-api/
 
 ## API Documentation
 
-Interactive docs are available via Swagger UI once the server is running at `http://localhost:5000/api-docs`.
+Interactive docs are live at https://budgety-adventure-api.onrender.com/api-docs, or at `http://localhost:5000/api-docs` when running locally.
 
 To access protected endpoints:
 1. Call `POST /api/users/login` and copy the returned `token`
@@ -111,7 +114,7 @@ To access protected endpoints:
 
 ## Getting Started
 
-**Prerequisites:** Node.js 14+, MongoDB (local or Atlas), a Mailtrap account for dev email testing.
+**Prerequisites:** Node.js 18+, MongoDB (local or Atlas), a Mailtrap account for dev email testing.
 
 ```bash
 git clone https://github.com/MrPhyaeSoneThwim/budgety-adventure-api.git
