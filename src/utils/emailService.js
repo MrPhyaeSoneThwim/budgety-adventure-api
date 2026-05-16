@@ -1,8 +1,6 @@
 const pug = require("pug");
 const path = require("path");
-const { google } = require("googleapis");
 const nodemailer = require("nodemailer");
-const OAuth2 = google.auth.OAuth2;
 
 module.exports = class EmailService {
   constructor(user) {
@@ -12,28 +10,13 @@ module.exports = class EmailService {
 
   newTransport() {
     if (process.env.NODE_ENV === "production") {
-      const oauth2Client = new OAuth2(
-        process.env.CLIENT_ID,
-        process.env.CLIENT_SECRET,
-        process.env.OAUTH_PLAYGORUND
-      );
-
-      oauth2Client.setCredentials({
-        forceRefreshOnFailure: true,
-        refresh_token: process.env.REFRESH_TOKEN,
-      });
-
-      const accessToken = oauth2Client.getAccessToken();
-
       return nodemailer.createTransport({
-        service: "gmail",
+        host: "smtp.gmail.com",
+        port: 465,
+        secure: true,
         auth: {
-          type: "OAuth2",
           user: process.env.MAIL_USERNAME,
-          clientId: process.env.CLIENT_ID,
-          clientSecret: process.env.CLIENT_SECRET,
-          refreshToken: process.env.REFRESH_TOKEN,
-          accessToken: accessToken,
+          pass: process.env.MAIL_PASSWORD,
         },
       });
     }
