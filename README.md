@@ -12,6 +12,7 @@ A production-ready personal finance REST API built with Node.js, Express, and Mo
 - **Transaction Analytics** — MongoDB aggregation pipelines power monthly income/expense summaries (with percentage breakdown and net difference) and full annual stats grouped by month
 - **Image Processing Pipeline** — avatar uploads processed in-memory by Sharp before disk write; never touches disk in raw form
 - **Dual Email Transport** — single `EmailService` class switches between Mailtrap (development) and Gmail SMTP with app-password auth (production) based on `NODE_ENV`
+- **OpenAPI 3.0 Documentation** — full Swagger UI served at `/api-docs`; all 18 paths documented with request/response schemas, JWT auth, and inline examples
 
 ---
 
@@ -28,6 +29,7 @@ A production-ready personal finance REST API built with Node.js, Express, and Mo
 | Image Processing | Sharp + Multer |
 | Validation | Mongoose validators + validator.js |
 | Utilities | Lodash, Moment.js |
+| API Docs | swagger-jsdoc + swagger-ui-express (OpenAPI 3.0) |
 
 ---
 
@@ -43,7 +45,9 @@ budgety-adventure-api/
     ├── middlewares/              # protect (JWT), error handler, upload, resize
     ├── utils/                    # emailService, field whitelisting, file utils
     ├── data/                     # Static seed data (categories, months)
-    └── views/                    # Pug email templates
+    ├── views/                    # Pug email templates
+    ├── swagger/                  # swagger-jsdoc config and spec generation
+    └── docs/                     # OpenAPI JSDoc annotations (one file per resource)
 ```
 
 **Request lifecycle:** `Route → protect middleware (JWT verify) → Controller → Model → Response`
@@ -98,11 +102,27 @@ budgety-adventure-api/
 
 | Method | Endpoint | Auth | Description |
 |---|---|---|---|
-| GET | `/` | JWT | List categories |
+| GET | `/` | JWT | List categories (filterable by `type`) |
 | POST | `/` | JWT | Create category |
-| GET | `/:id` | JWT | Get category |
+| GET | `/:id` | JWT | Get category with total transaction amount |
 | PUT | `/:id` | JWT | Update category |
-| DELETE | `/:id` | JWT | Delete category |
+| DELETE | `/:id` | JWT | Delete category (cascades transactions) |
+| GET | `/stats/year/:year/month/:month/type/:type` | JWT | Monthly category breakdown with percentages |
+
+---
+
+## API Documentation
+
+Interactive API documentation is available via Swagger UI once the server is running:
+
+```
+http://localhost:5000/api-docs
+```
+
+All 18 endpoints are documented with full request/response schemas. To access protected endpoints:
+1. Call `POST /api/users/login` and copy the returned `token`
+2. Click **Authorize** in Swagger UI and paste the token
+3. All JWT-protected endpoints unlock for the session (`persistAuthorization` is enabled)
 
 ---
 
